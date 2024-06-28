@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: threads
+  annotations:
+    # cpu-quota.crio.io: "disable" 
+    cpu-load-balancing.crio.io: "disable" 
+    # irq-load-balancing.crio.io: "disable" 
+spec:
+  securityContext:
+    # runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+  - name: threads
+    image: quay.io/akaris/threads:latest
+    command:
+    - /bin/thread
+    - "4"
+    resources:
+      requests:
+        cpu: 4100m
+        memory: "200M"
+      limits:
+        cpu: 4100m
+        memory: "200M"
+  - name: forks
+    image: quay.io/akaris/threads:latest
+    command:
+    - /bin/fork
+    - "4"
+    resources:
+      requests:
+        cpu: 4
+        memory: "200M"
+      limits:
+        cpu: 4
+        memory: "200M"
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop: [ALL]
+  runtimeClassName: performance-performance
