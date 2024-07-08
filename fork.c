@@ -14,7 +14,9 @@ int main(int argc, char **argv) {
   int num_forks = atoi(argv[1]);
   pid_t pid, wpid;
 
+  /* Fork a new child process and sleep before each fork for 2 seconds */
   for (int i = 0; i < num_forks; i++) {
+    sleep(2);
     if (signal(SIGCHLD, SIG_IGN) == SIG_ERR) {
       perror("signal");
       exit(EXIT_FAILURE);

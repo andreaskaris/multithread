@@ -29,9 +29,11 @@ int main(int argc, char **argv) {
   pthread_t threads[MAX_THREADS];
   int iret[MAX_THREADS];
 
-  /* Create independent threads each of which will execute function */
+  /* Create independent threads each of which will execute function and 
+   * sleep 2 seconds between each thread creation*/
 
   for (int i = 0; i < num_forks; i++) {
+    sleep(2);
     iret[i] = pthread_create(&threads[i], NULL, busy_loop, NULL);
   }
 

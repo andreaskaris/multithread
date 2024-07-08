@@ -19,10 +19,10 @@ spec:
     - "4"
     resources:
       requests:
-        cpu: 4100m
+        cpu: 4
         memory: "200M"
       limits:
-        cpu: 4100m
+        cpu: 4
         memory: "200M"
   - name: forks
     image: quay.io/akaris/threads:latest
